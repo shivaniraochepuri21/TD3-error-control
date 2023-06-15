@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "runner.py", line 95, in <module>
+    runner.run()
+  File "runner.py", line 36, in run
+    self.e_prev = state - self.target_state
+ValueError: operands could not be broadcast together with shapes (3,) (2,)

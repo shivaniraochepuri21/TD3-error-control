@@ -1,0 +1,75 @@
+
+Episode: 0, Reward: -203837.48019756377
+/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py:57: DeprecationWarning: [33mWARN: You are calling render method, but you didn't specified the argument render_mode at environment initialization. To maintain backward compatibility, the environment will render in human mode.
+[33mIf you want to render in human mode, initialize the environment in this way: gym.make('EnvName', render_mode='human') and don't call the render method.
+[33mSee here for more information: https://www.gymlibrary.ml/content/api/
+  deprecation(
+Test Episode: 0, Reward: -1611.2681951473432
+Episode: 1, Reward: -151107.36953265546
+Episode: 2, Reward: -165626.310234932
+Episode: 3, Reward: -215908.38500841957
+Episode: 4, Reward: -199655.63207138708
+Episode: 5, Reward: -156897.52694777073
+Episode: 6, Reward: -206900.94385722384
+Episode: 7, Reward: -101137.24361207697
+Episode: 8, Reward: -198343.84587067406
+Episode: 9, Reward: -203187.19329642225
+Episode: 10, Reward: -199605.07460976782
+Episode: 11, Reward: -150445.11727695083
+Episode: 12, Reward: -155730.6244050742
+Episode: 13, Reward: -154846.57109890858
+Episode: 14, Reward: -207922.55261257666
+Episode: 15, Reward: -199901.35218068952
+Episode: 16, Reward: -151500.6190330814
+Episode: 17, Reward: -173575.87062218192
+Episode: 18, Reward: -165438.17010462037
+Episode: 19, Reward: -151099.9036878494
+Episode: 20, Reward: -199738.1206370912
+Episode: 21, Reward: -203848.75789513948
+Episode: 22, Reward: -210345.2710867605
+Episode: 23, Reward: -203178.53521786377
+Episode: 24, Reward: -149150.62128962672
+Episode: 25, Reward: -203118.87099215898
+Episode: 26, Reward: -148930.33453934552
+Episode: 27, Reward: -175463.56462938443
+Episode: 28, Reward: -201609.88236812575
+Episode: 29, Reward: -199682.04238618567
+Episode: 30, Reward: -202812.61464564336
+Episode: 31, Reward: -189999.37477458056
+Episode: 32, Reward: -176385.59758209705
+Episode: 33, Reward: -199887.38277782922
+Episode: 34, Reward: -190396.0451102829
+Episode: 35, Reward: -208752.0659259626
+Episode: 36, Reward: -194336.7195053157
+Episode: 37, Reward: -199581.33809642273
+Episode: 38, Reward: -132339.73750674544
+Episode: 39, Reward: -208772.1454753344
+Episode: 40, Reward: -203835.55359655654
+Episode: 41, Reward: -136290.93269306314
+Episode: 42, Reward: -176554.3917152703
+Episode: 43, Reward: -210371.46174747622
+Episode: 44, Reward: -201318.80782761902
+Episode: 45, Reward: -191020.5320600317
+Episode: 46, Reward: -200016.99447111526
+Episode: 47, Reward: -203216.1866010772
+Episode: 48, Reward: -199573.58762511748
+Episode: 49, Reward: -190817.82972449798
+Episode: 50, Reward: -199993.87345482234
+Episode: 51, Reward: -204109.24623419766
+Episode: 52, Reward: -190197.1281373194
+Episode: 53, Reward: -190281.51328765452
+Episode: 54, Reward: -199566.0368252532
+Episode: 55, Reward: -196609.6708638478
+Episode: 56, Reward: -189689.00963463073
+Episode: 57, Reward: -180633.1649786762
+Episode: 58, Reward: -208946.31123439944
+Traceback (most recent call last):
+  File "runner.py", line 98, in <module>
+    runner.run()
+  File "runner.py", line 38, in run
+    action = self.agent.act(state) + np.random.normal(0, self.noise_variance, self.env.action_space.shape)
+  File "/home/ck/shivani_research/TD3-error-control/Agent.py", line 26, in act
+    action = self.TD.select_action(state)
+  File "/home/ck/shivani_research/TD3-error-control/TD3.py", line 110, in select_action
+    action = self.actor(state).cpu().data.numpy()
+KeyboardInterrupt

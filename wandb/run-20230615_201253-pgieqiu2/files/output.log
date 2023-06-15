@@ -1,0 +1,16 @@
+
+Episode: 0, Reward: -190299.29819837378
+Traceback (most recent call last):
+  File "runner.py", line 98, in <module>
+    runner.run()
+  File "runner.py", line 56, in run
+    self.agent.TD.save(f"checkpoints/{episode}")
+  File "/home/ck/shivani_research/TD3-error-control/TD3.py", line 175, in save
+    torch.save(self.critic.state_dict(), filename + "_critic.pt")
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/torch/serialization.py", line 369, in save
+    with _open_file_like(f, 'wb') as opened_file:
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/torch/serialization.py", line 230, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/torch/serialization.py", line 211, in __init__
+    super(_open_file, self).__init__(open(name, mode))
+FileNotFoundError: [Errno 2] No such file or directory: 'checkpoints/0_critic.pt'

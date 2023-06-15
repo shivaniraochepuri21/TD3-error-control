@@ -1,0 +1,47 @@
+
+Episode: 0, Reward: -150568.73677347187
+/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py:57: DeprecationWarning: [33mWARN: You are calling render method, but you didn't specified the argument render_mode at environment initialization. To maintain backward compatibility, the environment will render in human mode.
+[33mIf you want to render in human mode, initialize the environment in this way: gym.make('EnvName', render_mode='human') and don't call the render method.
+[33mSee here for more information: https://www.gymlibrary.ml/content/api/
+  deprecation(
+Test Episode: 0, Reward: -1063.2942713206905
+Episode: 1, Reward: -205259.5076955571
+Episode: 2, Reward: -136316.50215503274
+Episode: 3, Reward: -151211.35130736238
+Episode: 4, Reward: -148842.09527119607
+Episode: 5, Reward: -154261.739397805
+Episode: 6, Reward: -199451.31740489515
+Episode: 7, Reward: -191094.63188026226
+Episode: 8, Reward: -206806.4053593332
+Episode: 9, Reward: -153151.0663296645
+Episode: 10, Reward: -216307.02272065647
+Traceback (most recent call last):
+  File "runner.py", line 99, in <module>
+    runner.run()
+  File "runner.py", line 59, in run
+    self.test(episode)
+  File "runner.py", line 75, in test
+    self.env.render()
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 66, in render
+    return render_func(self, *args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 433, in render
+    return self.env.render(*args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 66, in render
+    return render_func(self, *args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/wrappers/order_enforcing.py", line 51, in render
+    return self.env.render(*args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 66, in render
+    return render_func(self, *args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 433, in render
+    return self.env.render(*args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 66, in render
+    return render_func(self, *args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/wrappers/env_checker.py", line 55, in render
+    return self.env.render(*args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/core.py", line 66, in render
+    return render_func(self, *args, **kwargs)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/envs/classic_control/pendulum.py", line 178, in render
+    return self._render(mode)
+  File "/home/ck/miniconda3/envs/selfplay/lib/python3.8/site-packages/gym/envs/classic_control/pendulum.py", line 258, in _render
+    self.screen.blit(self.surf, (0, 0))
+pygame.error: display Surface quit
