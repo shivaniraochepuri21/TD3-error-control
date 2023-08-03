@@ -1,0 +1,1 @@
+from gym_mypendulum.envs.mypendulum_env import MyPendulumEnv

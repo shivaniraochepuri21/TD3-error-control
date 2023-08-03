@@ -8,6 +8,7 @@ import time
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # device = torch.device("cpu")
 print(device)
+
 class Actor(nn.Module):
     def __init__(self, state_dim, action_dim, max_action, action_scale, action_add):
         super(Actor, self).__init__()
@@ -28,6 +29,7 @@ class Actor(nn.Module):
         a = F.relu(self.l3(a))
         a = self.l4(a)
         a = self.action_scale * torch.tanh(a) + self.action_add
+        a = a*self.max_action
 
         return a
 
@@ -177,7 +179,7 @@ class TD3(object):
 
 
     def load(self, filename):
-        self.critic.load_state_dict(torch.load(filename + "_critic.pt",map_location=torch.device('cpu')))
+        self.critic.load_state_dict(torch.load(filename + "_critic.pt", map_location=torch.device('cpu')))
         self.critic_target = copy.deepcopy(self.critic)
 
         self.actor.load_state_dict(torch.load(filename + "_actor.pt", map_location=torch.device('cpu')))

@@ -7,7 +7,7 @@ import os
 from noise import *
 
 class SimpleRunner:
-    def __init__(self, num_episodes=1000, learn_every=1, noise_variance=0.1, viz=False, eval_every=200, wandb_on=False) -> None:
+    def __init__(self, num_episodes=1000, learn_every=1, noise_variance=0.1, viz=False, eval_every=200, wandb_on=True) -> None:
         self.env = gym.make('gym_mypendulum:mypendulum-v0', render_mode='rgb_array')
         self.num_episodes = num_episodes
         self.agent = Agent(self.env.observation_space.shape[0], self.env.action_space.shape[0])
@@ -17,10 +17,10 @@ class SimpleRunner:
         self.eval_every = eval_every
         self.wandb_on = wandb_on
         self.avg_window = self.num_episodes//20
-        self.best_model_episode = 290
+        self.best_model_episode = 769
         self.target_observation = np.array([1.0, 0.0, 0.0])
         self.K = 1
-        self.w1 = 10.0
+        self.w1 = 1.0
         self.w2 = 0.0
         self.w3 = 0.0
         self.e_next = None
@@ -50,7 +50,7 @@ class SimpleRunner:
             score = 0
             episode_len = 0
             episode_action = 0
-            # episode_error = np.array([0.0,0.0])
+            episode_error = np.array([0.0, 0.0])
             err_actor_episode = 0
             err_critic_episode = 0
             # score_rewards = []
@@ -58,7 +58,6 @@ class SimpleRunner:
                 actor_noise = np.random.normal(0, self.noise_variance, self.env.action_space.shape)    
                 action = self.agent.act(observation) + actor_noise
                 observation_, reward, done, done_, _ = self.env.step(action)
-
                 # reward = self.get_reward(observation, observation_, action[0], 0)
 
                 done = done or done_
@@ -72,7 +71,7 @@ class SimpleRunner:
                 score += reward
                 episode_len+=1
                 episode_action += float(action)
-                # episode_error += self.e
+                episode_error += self.e
                 # score_rewards.append(reward)
                 err_actor_episode += err_actor
                 err_critic_episode += err_critic
@@ -88,8 +87,7 @@ class SimpleRunner:
             print(f"train_episodes: {episode}, train_scores:{score}")
 
             if self.wandb_on:
-                wandb.log({"train_episodes":episode, "train_scores":score, "train_episodes_lens":episode_len, "train_episodes_actor_loss": err_actor_episode, "train_episodes_critic_loss":err_critic_episode, "train_episodes_avg_score":avg_score, "train_episodes_total_action":episode_action})
-                # "train_episode_error_mag":np.linalg.norm(episode_error)
+                wandb.log({"train_episodes":episode, "train_scores":score, "train_episodes_lens":episode_len, "train_episodes_actor_loss": err_actor_episode, "train_episodes_critic_loss":err_critic_episode, "train_episodes_avg_score":avg_score, "train_episodes_total_action":episode_action, "train_episode_error_mag":np.linalg.norm(episode_error)})
 
                 # "train_episodes_error_theta":episode_error[0], "train_episode_error_dtheta":episode_error[1],
 
@@ -109,12 +107,11 @@ class SimpleRunner:
         observation, _ = self.env.reset()
         done = False
         score = 0
-        # episode_error = np.array([0.0, 0.0])
+        episode_error = np.array([0.0, 0.0])
         step = 0
         while not done:
             action = self.agent.act(observation)
             observation_, reward, done, done_, _ = self.env.step(action)
-
             # reward = self.get_reward(observation, observation_, action[0], 1, episode)
 
             done = done or done_
@@ -123,14 +120,14 @@ class SimpleRunner:
                 self.env.render()
             self.env.render()
             score += reward
-            # episode_error += self.e
+            episode_error += self.e
             step+=1
             if self.wandb_on:
                 wandb.log({"eval_observations_theta" + str(episode): np.arccos(observation[0]), "eval_observations_dtheta" + str(episode): observation[2], "eval_actions" + str(episode):action, "eval_steps" :step})
 
         print(f"eval_episode: {episode}, eval_score: {score}")
         if self.wandb_on:
-            wandb.log({"eval_episodes":episode, "eval_scores": score}) #"eval_episode_errors_mag": np.linalg.norm(episode_error)
+            wandb.log({"eval_episodes":episode, "eval_scores": score, "eval_episode_errors_mag": np.linalg.norm(episode_error)})
 
     def test_after_training(self): # we test for one episode
         self.env = gym.make('gym_mypendulum:mypendulum-v0', render_mode='human')
@@ -145,7 +142,6 @@ class SimpleRunner:
         while not done:
             action = self.agent.act(observation)
             observation_, reward, done, done_, _ = self.env.step(action)
-
             # reward = self.get_reward(observation, observation_, action[0], 2)
 
             done = done or done_
@@ -192,5 +188,5 @@ class SimpleRunner:
 
 if __name__ == "__main__":
     runner = SimpleRunner(viz = False)
-    # runner.run()
+    runner.run()
     runner.test_after_training()

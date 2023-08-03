@@ -1,0 +1,10 @@
+README.md
+setup.py
+gym_mypendulum/__init__.py
+gym_mypendulum.egg-info/PKG-INFO
+gym_mypendulum.egg-info/SOURCES.txt
+gym_mypendulum.egg-info/dependency_links.txt
+gym_mypendulum.egg-info/requires.txt
+gym_mypendulum.egg-info/top_level.txt
+gym_mypendulum/envs/__init__.py
+gym_mypendulum/envs/mypendulum_env.py
